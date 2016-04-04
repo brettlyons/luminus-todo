@@ -5,7 +5,7 @@
             [clojure.java.io :as io]))
 
 (defn home-page []
-  (layout/render "home.html"))
+  (str "<img src='http://www.lfed-mw.com/animations/under_construction_animated.gif'>"))
 
 (defroutes home-routes
   (GET "/" [] (home-page))
