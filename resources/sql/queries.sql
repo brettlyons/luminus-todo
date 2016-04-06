@@ -28,3 +28,10 @@ WHERE id = :id
 -- :doc returns the list of todos for a given todo_list :id
 SELECT * FROM todos
 WHERE list = 1
+
+-- :name create-todo! :! :1
+-- :doc puts a new todo in the database
+INSERT INTO todos
+(id, description, done, list)
+VALUES
+(DEFAULT, :description, FALSE, 1)

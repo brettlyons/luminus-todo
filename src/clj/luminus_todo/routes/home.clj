@@ -14,8 +14,10 @@
 (defn home-page []
   ; (layout/render "home.html"))
   (hiccup/html
-    [:ul (map list-todos (db/get-todos))]))
-
+    [:ul (map list-todos (db/get-todos))]
+    [:form {:action "/api/add-todo" :method "POST"}
+          [:input {:type "Text" :name "description" :placeholder "Todo: "}]
+          [:input {:type "submit" :value "Add todo to list"}]]))
 
 (defn about-page []
   (hiccup/html
