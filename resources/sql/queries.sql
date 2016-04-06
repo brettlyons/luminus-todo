@@ -41,3 +41,8 @@ VALUES
 UPDATE todos
 SET done = :done
 WHERE id = :id
+
+-- :name delete-todo! :! :1
+-- :doc Deletes the todo with the given id
+DELETE FROM todos
+WHERE id = :id

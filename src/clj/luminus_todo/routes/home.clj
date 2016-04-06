@@ -20,9 +20,15 @@
 (defn list-todos [todo]
   (hiccup/html
     [:li (todo-strikethrough todo)
-      [:form {:action (str "/api/update-todo/" (:id todo)) :method "POST"}
+      [:form {:action (str "/api/update-todo/" (:id todo))
+              :method "POST"}
         [:input (done-changer (:done todo))]
-        [:input {:type "hidden" :name "done" :value (str (not (:done todo)))}]]]))
+        [:input {:type "hidden"
+                 :name "done"
+                 :value (str (not (:done todo)))}]]
+      [:form {:action (str "/api/delete-todo/" (:id todo))
+              :method "POST"}
+        [:input {:type "submit" :value "Delete"}]]]))
 
 
 (defn home-page []

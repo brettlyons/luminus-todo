@@ -37,9 +37,14 @@
       :path-params [id :- Long]
       :form-params [done :- Boolean]
       :summary "Update the doneness status of a todo"
-      (println "id: " id " done: " done)
       (db/update-done! {:id id :done done})
       (ok))
+    (POST "/delete-todo/:id" []
+      :path-params [id :- Long]
+      :summary "Delete the todo with this id"
+      (db/delete-todo! {:id id})
+      (ok))
+
     ;(GET "/times/:x/:y" []
       ;:return      Long
       ;:path-params [x :- Long, y :- Long]
