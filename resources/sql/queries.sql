@@ -19,3 +19,12 @@ WHERE id = :id
 -- :doc delete a user given the id
 DELETE FROM users
 WHERE id = :id
+
+-- :name get-joined-todos :? :*
+-- :doc join todos w/ table name
+-- select todos.id, description, done, list, title from todos, todo_list;
+
+-- :name get-todos :? :*
+-- :doc returns the list of todos for a given todo_list :id
+SELECT * FROM todos
+WHERE list = 1

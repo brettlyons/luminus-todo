@@ -27,6 +27,7 @@
                  [conman "0.4.7"]
                  [org.postgresql/postgresql "9.4-1206-jdbc4"]
                  [org.clojure/clojurescript "1.8.40" :scope "provided"]
+                 [hiccup "1.0.5"]
                  [reagent "0.5.1"]
                  [reagent-forms "0.5.22"]
                  [reagent-utils "0.1.7"]
@@ -58,11 +59,11 @@
       :output-dir "target/cljsbuild/public/js/out"
       :externs ["react/externs/react.js"]
       :pretty-print true}}}}
-  
+
   :target-path "target/%s/"
   :profiles
   {:uberjar {:omit-source true
-             
+
               :prep-tasks ["compile" ["cljsbuild" "once"]]
               :cljsbuild
               {:builds
@@ -72,8 +73,8 @@
                  {:optimizations :advanced
                   :pretty-print false
                   :closure-warnings
-                  {:externs-validation :off :non-standard-jsdoc :off}}}}} 
-             
+                  {:externs-validation :off :non-standard-jsdoc :off}}}}}
+
              :aot :all
              :uberjar-name "luminus-todo.jar"
              :source-paths ["env/prod/clj"]
@@ -91,7 +92,7 @@
                                  [lein-figwheel "0.5.2"]
                                  [lein-doo "0.1.6"]
                                  [org.clojure/clojurescript "1.8.40"]]
-                  
+
                    :cljsbuild
                    {:builds
                     {:app
@@ -107,8 +108,8 @@
                       {:output-to "target/test.js"
                        :main "luminus-todo.doo-runner"
                        :optimizations :whitespace
-                       :pretty-print true}}}} 
-                  
+                       :pretty-print true}}}}
+
                   :figwheel
                   {:http-server-root "public"
                    :nrepl-port 7002
