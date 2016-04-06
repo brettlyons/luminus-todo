@@ -7,9 +7,23 @@
             [clojure.java.io :as io]))
 
 
+(defn done-changer [done?]
+  (if done?
+    {:type "submit" :value "Undo"}
+    {:type "submit" :value "Complete"}))
+
+(defn todo-strikethrough [todo]
+  (if (:done todo)
+    [:del (str todo)]
+    (str todo)))
+
 (defn list-todos [todo]
   (hiccup/html
-    [:li (str todo)]))
+    [:li (todo-strikethrough todo)
+      [:form {:action (str "/api/update-todo/" (:id todo)) :method "POST"}
+        [:input (done-changer (:done todo))]
+        [:input {:type "hidden" :name "done" :value (str (not (:done todo)))}]]]))
+
 
 (defn home-page []
   ; (layout/render "home.html"))
@@ -24,8 +38,7 @@
     [:h1 "This project is a todo list implementation.  For DemocracyWorks!"]))
 
 (defroutes home-routes
-  (GET "/" []
-       (home-page))
+  (GET "/" [] (home-page))
   (GET "/about" [] (about-page))
   (GET "/docs" [] (response/ok (-> "docs/docs.md" io/resource slurp))))
 

@@ -35,3 +35,9 @@ INSERT INTO todos
 (id, description, done, list)
 VALUES
 (DEFAULT, :description, FALSE, 1)
+
+-- :name update-done! :! :1
+-- :doc changes the state of the "done" column for 1 todo.
+UPDATE todos
+SET done = :done
+WHERE id = :id

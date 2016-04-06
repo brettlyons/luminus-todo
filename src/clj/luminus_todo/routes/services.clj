@@ -17,7 +17,7 @@
                            :title "Sample API"
                            :description "Sample Services"}}}}
   (context "/api" []
-    :tags ["thingie"]
+    :tags ["todos"]
 
     ;(GET "/plus" []
       ;:return       Long
@@ -33,6 +33,13 @@
       (db/create-todo! {:description description})
       (ok))
 
+    (POST "/update-todo/:id" []
+      :path-params [id :- Long]
+      :form-params [done :- Boolean]
+      :summary "Update the doneness status of a todo"
+      (println "id: " id " done: " done)
+      (db/update-done! {:id id :done done})
+      (ok))
     ;(GET "/times/:x/:y" []
       ;:return      Long
       ;:path-params [x :- Long, y :- Long]
@@ -73,4 +80,5 @@
         :path-params [kakka :- s/Str]
         (ok {:kikka kikka
              :kukka kukka
-             :kakka kakka})))))
+             :kakka kakka}))))
+))
