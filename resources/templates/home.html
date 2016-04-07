@@ -10,16 +10,19 @@
     <div id="app">
       <div class="container">
         <div class="three-quarters-loader">Loading…</div>
-        <p>If you're seeing this message, that means you haven't yet compiled your ClojureScript!</p>
-        <p>Please run <code>lein figwheel</code> to start the ClojureScript compiler and reload the page.</p>
-        <p>See <a href="http://www.luminusweb.net/docs/clojurescript.md">ClojureScript</a> documentation for further details.</p>
+        <p>ClojureScript is compiling.  Just a moment.</p>
       </div>
     </div>
 
     <!-- scripts and styles -->
     {% style "/assets/bootstrap/css/bootstrap.min.css" %}
     {% style "/assets/font-awesome/css/font-awesome.min.css" %}
+    {% style "/assets/css/material-design-iconic-font.min.css" %}
     {% style "/css/screen.css" %}
+    {% style "/assets/css/re-com.css" %}
+
+    {% style "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" %}
+    {% style "http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" %}
 
     <script type="text/javascript">
         var context = "{{servlet-context}}";

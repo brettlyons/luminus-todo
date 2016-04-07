@@ -31,6 +31,8 @@
                  [reagent "0.5.1"]
                  [reagent-forms "0.5.22"]
                  [reagent-utils "0.1.7"]
+                 [re-frame "0.7.0"]
+                 [re-com "0.8.0"]
                  [secretary "1.2.3"]
                  [cljs-ajax "0.5.4"]
                  [metosin/compojure-api "1.0.2"]

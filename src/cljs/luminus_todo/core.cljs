@@ -33,22 +33,19 @@
   [:div.container
    [:div.row
     [:div.col-md-12
-     "this is the story of luminus-todo... work in progress"]]])
+     "This project is a todo list implementation.  For DemocracyWorks!"]]])
 
 (defn home-page []
   [:div.container
    [:div.jumbotron
-    [:h1 "Welcome to luminus-todo"]
-    [:p "Time to start building your site!"]
-    [:p [:a.btn.btn-primary.btn-lg {:href "http://luminusweb.net"} "Learn more »"]]]
+    [:h1 "Welcome to luminus-todo lists"]
+    [:p "Time to start building your site!"]]
    [:div.row
     [:div.col-md-12
-     [:h2 "Welcome to ClojureScript"]]]
+     [:h2 "some text"]]]
    (when-let [docs (session/get :docs)]
      [:div.row
-      [:div.col-md-12
-       [:div {:dangerouslySetInnerHTML
-              {:__html (md->html docs)}}]]])])
+      [:div.col-md-12]])])
 
 (def pages
   {:home #'home-page

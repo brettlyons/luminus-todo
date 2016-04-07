@@ -37,12 +37,12 @@
     [:ul (map list-todos (db/get-todos {:id (:list lists-and-todos)}))]))
 
 (defn home-page []
-  ; (layout/render "home.html")) ;; for later cljs / re-frame / re-com
-  (hiccup/html
-    (list-todo-lists (db/get-lists-joined-todos))
-    [:form {:action "/api/add-todo" :method "POST"}
-          [:input {:type "Text" :name "description" :placeholder "Todo: "}]
-          [:input {:type "submit" :value "Add todo to list"}]]))
+  (layout/render "home.html")) ;; for later cljs / re-frame / re-com
+  ;(hiccup/html
+    ;(list-todo-lists (db/get-lists-joined-todos))
+    ;[:form {:action "/api/add-todo" :method "POST"}
+          ;[:input {:type "Text" :name "description" :placeholder "Todo: "}]
+          ;[:input {:type "submit" :value "Add todo to list"}]]))
 
 (defn about-page []
   (hiccup/html
