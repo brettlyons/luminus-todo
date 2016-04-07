@@ -32,7 +32,6 @@
       (println description)
       (db/create-todo! {:description description})
       (ok))
-
     (POST "/update-todo/:id" []
       :path-params [id :- Long]
       :form-params [done :- Boolean]
@@ -44,7 +43,13 @@
       :summary "Delete the todo with this id"
       (db/delete-todo! {:id id})
       (ok))
-
+    (GET "/get-lists-joined-todos" []
+      :summary "Returns todos joined with lists"
+      (ok (db/get-lists-joined-todos)))
+    (GET "/get-todos/:list-id" []
+      :summary "Returns the todos for a given list"
+      :path-params [list-id :- Long]
+      (ok (db/get-todos {:id list-id})))
     ;(GET "/times/:x/:y" []
       ;:return      Long
       ;:path-params [x :- Long, y :- Long]

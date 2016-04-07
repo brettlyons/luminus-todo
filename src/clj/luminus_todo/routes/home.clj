@@ -6,7 +6,6 @@
             [ring.util.http-response :as response]
             [clojure.java.io :as io]))
 
-
 (defn done-changer [done?]
   (if done?
     {:type "submit" :value "Undo"}
@@ -30,11 +29,17 @@
               :method "POST"}
         [:input {:type "submit" :value "Delete"}]]]))
 
+(defn list-todo-lists [lists-and-todos]
+  (println lists-and-todos)
+  (println (db/get-todos {:id 1}))
+  (hiccup/html
+    [:h1 (:title (first lists-and-todos))]
+    [:ul (map list-todos (db/get-todos {:id (:list lists-and-todos)}))]))
 
 (defn home-page []
-  ; (layout/render "home.html"))
+  ; (layout/render "home.html")) ;; for later cljs / re-frame / re-com
   (hiccup/html
-    [:ul (map list-todos (db/get-todos))]
+    (list-todo-lists (db/get-lists-joined-todos))
     [:form {:action "/api/add-todo" :method "POST"}
           [:input {:type "Text" :name "description" :placeholder "Todo: "}]
           [:input {:type "submit" :value "Add todo to list"}]]))
@@ -45,6 +50,6 @@
 
 (defroutes home-routes
   (GET "/" [] (home-page))
-  (GET "/about" [] (about-page))
-  (GET "/docs" [] (response/ok (-> "docs/docs.md" io/resource slurp))))
+  (GET "/about" [] (about-page)))
 
+;; (GET "/docs" [] (response/ok (-> "docs/docs.md" io/resource slurp)))
