@@ -20,22 +20,22 @@ WHERE id = :id
 DELETE FROM users
 WHERE id = :id
 
--- :name get-lists-joined-todos :? :*
--- :doc join todos w/ list name
-SELECT todos.id, description, done, list, title
-FROM todos, todo_list;
+-- :name get-lists :? :*
+-- :doc returns the title and id of a todo_list
+SELECT id, title
+FROM todo_list;
 
 -- :name get-todos :? :*
--- :doc returns the list of todos for a given todo_list :id
+-- :doc returns the todos for a given todo_list's id
 SELECT * FROM todos
-WHERE list = :id
+WHERE list = :list_id
 
 -- :name create-todo! :! :1
 -- :doc puts a new todo in the database
 INSERT INTO todos
 (id, description, done, list)
 VALUES
-(DEFAULT, :description, FALSE, 1)
+(DEFAULT, :description, FALSE, :list_id)
 
 -- :name create-list! :! :1
 -- :doc makes a new empty todo-list int he db

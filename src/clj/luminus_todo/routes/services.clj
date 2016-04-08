@@ -25,12 +25,17 @@
       ;:summary      "x+y with query-parameters. y defaults to 1."
       ;(ok (+ x y)))
 
-    (POST "/add-todo" []
+    (POST "/create-todo" []
       ; :form-params [description :- String, list :- Long]
-      :form-params [description :- String]
+      :form-params [description :- String, list-id :- Long]
       :summary     "Post todos address"
       (println description)
-      (db/create-todo! {:description description})
+      (db/create-todo! {:description description :list_id list-id}) ;; eventually 1 -> list_id
+      (ok))
+    (POST "/create-list" []
+      :form-params [title :- String]
+      :summary "Creates a new, empty, todo list"
+      (db/create-list! {:title title})
       (ok))
     (POST "/update-todo/:id" []
       :path-params [id :- Long]
@@ -43,13 +48,17 @@
       :summary "Delete the todo with this id"
       (db/delete-todo! {:id id})
       (ok))
-    (GET "/get-lists-joined-todos" []
-      :summary "Returns todos joined with lists"
-      (ok (db/get-lists-joined-todos)))
+    (GET "/get-lists" []
+      :summary "Returns todos with lists"
+      ;(ok (db/get-lists)))
+      (ok (map (fn [todo-list] {:title (:title todo-list)
+                                :id (:id todo-list)
+                                :todos (db/get-todos {:list_id (:id todo-list)})})
+               (db/get-lists))))
     (GET "/get-todos/:list-id" []
       :summary "Returns the todos for a given list"
       :path-params [list-id :- Long]
-      (ok (db/get-todos {:id list-id})))
+      (ok (db/get-todos {:list_id list-id})))
     ;(GET "/times/:x/:y" []
       ;:return      Long
       ;:path-params [x :- Long, y :- Long]
