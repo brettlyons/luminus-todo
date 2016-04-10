@@ -1,5 +1,5 @@
 (ns luminus-todo.core
-  (:require [reagent.core :as r]
+  (:require [reagent.core :as r :refer [atom]]
             [reagent.session :as session]
             [secretary.core :as secretary :include-macros true]
             [goog.events :as events]
@@ -9,9 +9,10 @@
             [re-frame.core :as re-frame]
             [re-com.core :as re-com]
             [ajax.core :refer [GET POST]])
+  (:require-macros [reagent.ratom :refer [reaction]])
   (:import goog.History))
 
-
+;; -- NAVIGATION
 
 (defn nav-link [uri title page collapsed?]
   [:li.nav-item
@@ -33,6 +34,52 @@
          [nav-link "#/" "Home" :home collapsed?]
          [nav-link "#/about" "About" :about collapsed?]]]])))
 
+;; -- HANDLERS / SUBSCRIPTIONS
+
+(re-frame/register-handler
+  :initialize-db
+  (fn [db v]
+    {:lists []
+     :search-input ""}))
+
+(re-frame/register-handler
+  :process-lists-response
+  (fn [app-state [_ response]]
+    (println "res: " response)
+    (assoc-in app-state [:lists] (map (fn [lists-container]
+                                          { :id
+                                            (:id lists-container)
+                                            :todos
+                                            (:todos lists-container)
+                                            :title
+                                            (:title lists-container)})
+                                  response))))
+
+;;(map (fn [lists-container] (hash-map (keyword (:id lists-container)) (:todos lists-container))) response)
+
+(re-frame/register-handler
+  :process-lists-bad-response
+  (fn [app-state [_ response]]
+    (println "ERROR: " response)
+    app-state))
+
+
+(re-frame/register-handler
+  :load-lists
+  (fn [app-state _]
+    (GET "api/get-lists"
+              {:handler #(re-frame/dispatch [:process-lists-response %1])
+               :error-handler #(re-frame/dispatch [:process-lists-bad-response %1])})
+    app-state))
+
+(re-frame/register-sub
+  :lists
+  (fn [db]
+    (reaction (:lists @db))))
+
+;(re-frame/register-handler
+  ;:delete-todo
+  ;(fn [app-state _]))
 
 (defn btn-changer
   [doneness]
@@ -42,63 +89,70 @@
 
 (defn todo-cluster
   [todo]
-  (fn []
+  (fn [todo]
     [:li.list-group-item
       [:div.well.well-sm (if (:done todo)
                             [:del (:description todo)]
                             (:description todo))]
       [:div.input-group
           [:div.input-group-btn
-            [:form {:action (str "/update-done/" (:id todo)) :method "POST"}
-              (anti-forgery-field)
+            [:form {:action (str "api/update-todo/" (:id todo))
+                    :method "POST"}
               [:input (btn-changer (:done todo))]
-              [:input {:type "hidden" :name "done" :value (str (:done todo))}]
-              [:input {:type "hidden" :name "description" :value (str (:description todo))}]
-              [:input {:type "hidden" :name "list" :value (str (:list todo))}]
-              [:input {:type "hidden" :name "name" :value (str (:name todo))}]]
-            [:form {:action (str "/delete-todo/" (:id todo)) :method "POST"}
-              (anti-forgery-field)
-              [:input.btn.btn-danger.btn-sm {:type "submit" :value "Delete this Todo"}]]]]]))
+              [:input {:type "hidden"
+                       :name "done"
+                       :value (str (:done todo))}]
+              [:input {:type "hidden"
+                       :name "description"
+                       :value (str (:description todo))}]
+              [:input {:type "hidden"
+                       :name "list-id"
+                       :value (str (:list todo))}]
+              [:input {:type "hidden"
+                       :name "name"
+                       :value (str (:name todo))}]]
+            [:form {:action (str "/delete-todo/" (:id todo))
+                    :method "POST"}
+              [:input.btn.btn-danger.btn-sm {:type "submit"
+                                             :value "Delete this Todo"}]]]]]))
 
 (defn display-todo-list
-  [list-info]
+  []
   (fn []
     [:div.col-md-4
       [:div.panel.panel-default
         [:div.panel-heading (str (:title list-info))
-          [:a.btn.btn-danger.btn-sm.pull-right {:href (str "/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info))
-                                                                                                                        "visible"
-                                                                                                                        "hidden"))}
+          [:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
             [:span.glyphicon.glyphicon-minus]]
           [:div.panel-body
-            [:div.row]
-            [:ul.list-group
-              (map todo-cluster (:todos list-info))]
-            [:form {:action "/add-todo" :method "POST"}
-              (anti-forgery-field)
-              [:div.input-group]
-              [:input {:type "hidden" :name "list" :value (:id list-info)}]
-              [:input.form-control {:type "Text" :name "description" :placeholder "Todo: "}]
-              [:span.input-group-btn]
-              [:input.btn.btn-success {:type "submit" :value "Add todo to list"}]]]]]]))
+            [:div.row
+              [:ul.list-group
+                (map todo-cluster (:todos list-info))]
+              [:form {:action "api/add-todo" :method "POST"}
+                [:div.input-group]
+                [:input {:type "hidden"
+                         :name "list"
+                         :value (:id list-info)}]
+                [:input.form-control {:type "Text"
+                                      :name "description"
+                                      :placeholder "Todo: "}]
+                [:span.input-group-btn]
+                [:input.btn.btn-success {:type "submit"
+                                         :value "Add todo to list"}]]]]]]]))
 
 (defn list-add-form
   []
   (fn []
     [:div.col-md-4
-      [:form {:action (str "/add-list") :method "POST"}
+      [:form {:action (str "/api/add-list")
+              :method "POST"}
         [:div.input-group
-          [:input.form-control {:type "Text" :name "title" :placeholder "New List Title"}]
+          [:input.form-control {:type "Text"
+                                :name "title"
+                                :placeholder "New List Title"}]
           [:span.input-group-btn
-            [:input.btn.btn-success {:type "submit" :value "Add new list"}]]]]]))
-
-(defn main-page
-  [data-model]
-  (fn []
-    [:div
-      (layout-common "The Todo Lists" (map display-todo-list data-model))
-      (list-add-form)]))
-
+            [:input.btn.btn-success {:type "submit"
+                                     :value "Add new list"}]]]]]))
 
 (defn about-page []
   [:div.container
@@ -107,16 +161,18 @@
      "This project is a todo list implementation.  For DemocracyWorks!"]]])
 
 (defn home-page []
-  [:div.container
-   [:div.jumbotron
-    [:h1 "Welcome to luminus-todo lists"]
-    [:p "Time to start building your site!"]]
-   [:div.row
-    [:div.col-md-12
-     [:h2 "some text"]]]
-   (when-let [docs (session/get :docs)]
-     [:div.row
-      [:div.col-md-12]])])
+  (let [lists (re-frame/subscribe [:lists])]
+    (fn []
+      [:div.container
+        [:div.jumbotron
+          [:h1 "Welcome to luminus-todo lists"]]
+        [:div.row
+          [:div.col-md-12
+            ;; (println @lists)
+            [:ul (for [todo-list @lists]
+                    ^{:key (:id todo-list)}
+                    [:li (str todo-list)])]
+            [list-add-form]]]])))
 
 (def pages
   {:home #'home-page
@@ -148,8 +204,8 @@
 
 ;; -------------------------
 ;; Initialize app
-(defn fetch-docs! []
-  (GET (str js/context "/docs") {:handler #(session/put! :docs %)}))
+;(defn fetch-docs! []
+  ;(GET (str js/context "/docs") {:handler #(session/put! :docs %)}))
 
 (defn mount-components []
   (r/render [#'navbar] (.getElementById js/document "navbar"))
@@ -157,6 +213,8 @@
 
 (defn init! []
   (load-interceptors!)
-  (fetch-docs!)
+  ;(fetch-docs!)
   (hook-browser-navigation!)
+  (re-frame/dispatch [:initialize-db])
+  (re-frame/dispatch [:load-lists])
   (mount-components))
