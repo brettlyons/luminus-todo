@@ -46,14 +46,9 @@
   :process-lists-response
   (fn [app-state [_ response]]
     (println "res: " response)
-    (assoc-in app-state [:lists] (map (fn [lists-container]
-                                          { :id
-                                            (:id lists-container)
-                                            :todos
-                                            (:todos lists-container)
-                                            :title
-                                            (:title lists-container)})
-                                  response))))
+    (assoc-in app-state [:lists] (map #(zipmap (keys %)
+                                               (vals %))
+                                      response))))
 
 ;;(map (fn [lists-container] (hash-map (keyword (:id lists-container)) (:todos lists-container))) response)
 
@@ -90,6 +85,7 @@
 (defn todo-cluster
   [todo]
   (fn [todo]
+    (println "TODO CLUSTER: " todo)
     [:li.list-group-item
       [:div.well.well-sm (if (:done todo)
                             [:del (:description todo)]
@@ -117,17 +113,20 @@
                                              :value "Delete this Todo"}]]]]]))
 
 (defn display-todo-list
-  []
-  (fn []
+  [list-info]
+  (fn [list-info]
+    (println list-info "Todos List Info" (:todos list-info))
     [:div.col-md-4
       [:div.panel.panel-default
         [:div.panel-heading (str (:title list-info))
-          [:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
-            [:span.glyphicon.glyphicon-minus]]
+          ;[:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
+            [:span.glyphicon.glyphicon-minus]
           [:div.panel-body
             [:div.row
               [:ul.list-group
-                (map todo-cluster (:todos list-info))]
+                (for [todo (:todos list-info)]
+                    ^{:key (:id todo)}
+                    [todo-cluster todo])]
               [:form {:action "api/add-todo" :method "POST"}
                 [:div.input-group]
                 [:input {:type "hidden"
@@ -169,9 +168,12 @@
         [:div.row
           [:div.col-md-12
             ;; (println @lists)
-            [:ul (for [todo-list @lists]
-                    ^{:key (:id todo-list)}
-                    [:li (str todo-list)])]
+            (for [todo-list @lists]
+              ^{:key (:id todo-list)}
+              [display-todo-list todo-list])
+            ;[:ul (for [todo-list @lists]
+                    ;^{:key (:id todo-list)}
+                    ;[:li (str todo-list)])]
             [list-add-form]]]])))
 
 (def pages
