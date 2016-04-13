@@ -40,24 +40,32 @@
   :initialize-db
   (fn [db v]
     {:lists []
+     :todos {}
      :search-input ""}))
 
 (re-frame/register-handler
   :process-lists-response
   (fn [app-state [_ response]]
-    (println "res: " response)
-    (assoc-in app-state [:lists] (map #(zipmap (keys %)
-                                               (vals %))
-                                      response))))
+    (re-frame/dispatch [:load-todos (map :id response)])
+    (assoc-in app-state [:lists] response)))
 
-;;(map (fn [lists-container] (hash-map (keyword (:id lists-container)) (:todos lists-container))) response)
+(re-frame/register-handler
+  :process-todos-response
+  (fn [app-state [_ response]]
+    (println "TODOS HANDLER RESPONSE" response)
+    (println "app state" app-state)
+    (assoc-in app-state [:todos] (map #(zipmap (keys %)
+                                               (vals %)) response))))
+
+;(map :id response)
+;(map #(zipmap (keys %)
+              ;(vals %)))
 
 (re-frame/register-handler
   :process-lists-bad-response
   (fn [app-state [_ response]]
     (println "ERROR: " response)
     app-state))
-
 
 (re-frame/register-handler
   :load-lists
@@ -67,85 +75,85 @@
                :error-handler #(re-frame/dispatch [:process-lists-bad-response %1])})
     app-state))
 
+(re-frame/register-handler
+  :load-todos
+  (fn [app-state [_ remaining-list-ids]]
+    (println "rem ids" remaining-list-ids)
+    (println app-state)
+    (GET (str "api/get-todos/" (first remaining-list-ids))
+        {:handler #(re-frame/dispatch [:process-todos-response %1])
+         :error-handler #(re-frame/dispatch [:process-lists-bad-response %1])})
+    (if (not-empty (next remaining-list-ids))
+      (recur app-state [_ (next remaining-list-ids)])
+      app-state)))
+
+
+
+;(re-frame/register-handler
+  ;:delete-todo
+  ;(fn [app-state [_ todo-id]]
+    ;(POST (str "api/delete-todo/" todo-id)
+          ;{:handler #()
+           ;:error-handler #(println "ERROR DELETING: " %1)})
+    ;(app-state))) ;; we need to remove stuff via last line here
+
 (re-frame/register-sub
   :lists
   (fn [db]
     (reaction (:lists @db))))
 
-;(re-frame/register-handler
-  ;:delete-todo
-  ;(fn [app-state _]))
+(re-frame/register-sub
+  :todos
+  (fn [db]
+    (reaction (:todos @db))))
 
 (defn btn-changer
   [doneness]
-  (if doneness
-    {:class "btn btn-sm btn-primary" :value "Undo" :type "submit"}
-    {:class "btn btn-sm btn-success" :value "Complete" :type "submit"}))
+  (fn [doneness]
+    (if doneness
+      [:button.btn.btn-primary.btn-block "Undo"]
+      [:button.btn.btn-success.btn-block "Complete"])))
 
 (defn todo-cluster
   [todo]
   (fn [todo]
-    (println "TODO CLUSTER: " todo)
-    [:li.list-group-item
-      [:div.well.well-sm (if (:done todo)
-                            [:del (:description todo)]
-                            (:description todo))]
-      [:div.input-group
-          [:div.input-group-btn
-            [:form {:action (str "api/update-todo/" (:id todo))
-                    :method "POST"}
-              [:input (btn-changer (:done todo))]
-              [:input {:type "hidden"
-                       :name "done"
-                       :value (str (:done todo))}]
-              [:input {:type "hidden"
-                       :name "description"
-                       :value (str (:description todo))}]
-              [:input {:type "hidden"
-                       :name "list-id"
-                       :value (str (:list todo))}]
-              [:input {:type "hidden"
-                       :name "name"
-                       :value (str (:name todo))}]]
-            [:form {:action (str "/delete-todo/" (:id todo))
-                    :method "POST"}
-              [:input.btn.btn-danger.btn-sm {:type "submit"
-                                             :value "Delete this Todo"}]]]]]))
+    [:div.row
+      [:div.list-group-item (if (:done todo)
+                              [:del (:description todo)]
+                              (:description todo))
+        [:div.input-group
+          [btn-changer (:done todo)]
+          [:button.btn.btn-danger.btn-block "Delete"]]]]))
 
 (defn display-todo-list
   [list-info]
-  (fn [list-info]
-    (println list-info "Todos List Info" (:todos list-info))
-    [:div.col-md-4
-      [:div.panel.panel-default
-        [:div.panel-heading (str (:title list-info))
-          ;[:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
-            [:span.glyphicon.glyphicon-minus]
-          [:div.panel-body
-            [:div.row
+  (let [lists (re-frame/subscribe [:todos])]
+    (fn [list-info]
+      [:div.col-xs-6
+        [:div.card
+          [:div.card-header.card-title (str (:title list-info))
+            ;[:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
+              [:span.glyphicon.glyphicon-minus]
+            [:div.card-block
               [:ul.list-group
-                (for [todo (:todos list-info)]
+                (for [todo @lists]
                     ^{:key (:id todo)}
-                    [todo-cluster todo])]
-              [:form {:action "api/add-todo" :method "POST"}
-                [:div.input-group]
-                [:input {:type "hidden"
-                         :name "list"
-                         :value (:id list-info)}]
-                [:input.form-control {:type "Text"
-                                      :name "description"
-                                      :placeholder "Todo: "}]
-                [:span.input-group-btn]
-                [:input.btn.btn-success {:type "submit"
-                                         :value "Add todo to list"}]]]]]]]))
+                    [todo-cluster todo])]]
+            [:div.card-footer
+              [:input.form-control {:type "Text"
+                                    :name "description"}]
+              [:div.row {:style {:margin-bottom "20px"}}]
+              [:button.btn.btn-success.btn-block {:on-click (fn [e] (.log js/console e))}; (-> e .-parent .-value)))}
+                "Add todo to list."]]]]])))
+
 
 (defn list-add-form
   []
   (fn []
-    [:div.col-md-4
+    [:div.col-xs-6
       [:form {:action (str "/api/add-list")
               :method "POST"}
-        [:div.input-group
+        [:div.input-group.input-group-sm
           [:input.form-control {:type "Text"
                                 :name "title"
                                 :placeholder "New List Title"}]
@@ -167,13 +175,9 @@
           [:h1 "Welcome to luminus-todo lists"]]
         [:div.row
           [:div.col-md-12
-            ;; (println @lists)
             (for [todo-list @lists]
               ^{:key (:id todo-list)}
               [display-todo-list todo-list])
-            ;[:ul (for [todo-list @lists]
-                    ;^{:key (:id todo-list)}
-                    ;[:li (str todo-list)])]
             [list-add-form]]]])))
 
 (def pages

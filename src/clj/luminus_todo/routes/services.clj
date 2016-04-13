@@ -30,7 +30,7 @@
       :form-params [description :- String, list-id :- Long]
       :summary     "Post todos address"
       (println description)
-      (db/create-todo! {:description description :list_id list-id}) ;; eventually 1 -> list_id
+      (db/create-todo! {:description description :list_id list-id})
       (ok))
     (POST "/create-list" []
       :form-params [title :- String]
@@ -49,14 +49,14 @@
       (db/delete-todo! {:id id})
       (ok))
     (GET "/get-lists" []
-      :summary "Returns todos with lists"
+      :summary "Returns lists w/o todos"
       ;(ok (db/get-lists)))
       (ok (map (fn [todo-list] {:title (:title todo-list)
-                                :id (:id todo-list)
-                                :todos (db/get-todos {:list_id (:id todo-list)})})
+                                :id (:id todo-list)})
+                                ;:todos (db/get-todos {:list_id (:id todo-list)})})
                (db/get-lists))))
     (GET "/get-todos/:list-id" []
-      :summary "Returns the todos for a given list"
+      :summary "Returns the todos for a given list id"
       :path-params [list-id :- Long]
       (ok (db/get-todos {:list_id list-id})))
     ;(GET "/times/:x/:y" []
