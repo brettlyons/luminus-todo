@@ -7,7 +7,7 @@
             [markdown.core :refer [md->html]]
             [luminus-todo.ajax :refer [load-interceptors!]]
             [re-frame.core :as re-frame]
-            [re-com.core :as re-com]
+            ; [re-com.core :as re-com]
             [ajax.core :refer [GET POST]])
   (:require-macros [reagent.ratom :refer [reaction]])
   (:import goog.History))
@@ -41,7 +41,8 @@
   (fn [db v]
     {:lists []
      :todos {}
-     :search-input ""}))
+     :search-input ""
+     :new-todo-content nil}))
 
 (re-frame/register-handler
   :process-lists-response
@@ -70,6 +71,7 @@
 (re-frame/register-handler
   :process-todos-response
   (fn [app-state [_ response list-id]]
+    (println "process-t-r" response)
     (assoc-in app-state [:todos] (concat (:todos app-state) response))))
 
 (re-frame/register-handler
@@ -96,6 +98,29 @@
            :error-handler #(println "ERROR DELETING: " %1)})
     app-state))
 
+(re-frame/register-handler
+  :create-todo
+  (fn [app-state [_ todo-content list-id]]
+    (println "create-todo" @todo-content list-id)
+    (re-frame/dispatch [:post-todo @todo-content list-id])
+    (assoc-in app-state [:todos] (cons (:todos app-state) {:description @todo-content :done false :list list-id}))))
+
+(re-frame/register-handler
+  :post-todo
+  (fn [app-state [_ todo-content list-id]]
+    ;(POST "api/create-todo"
+          ;{:params {:description todo-content
+                    ;:list-id list-id}
+           ;:handler #(re-frame/dispatch [:process-post-todo])
+           ;:error-handler #(println "CREATE-TODO-ERROR: " %)})
+    app-state))
+
+(re-frame/register-handler
+  :new-todo-change
+  (fn [app-state [_ new-content list-id]]
+    (println app-state)
+    (assoc-in app-state [:new-todo-content list-id] new-content)))
+
 (re-frame/register-sub
   :lists
   (fn [db]
@@ -105,6 +130,12 @@
   :todos
   (fn [db [_ list-id]]
     (reaction (filter #(= list-id (:list %)) (:todos @db)))))
+
+(re-frame/register-sub
+  :new-todo-content
+  (fn [db [_ list-id]]
+    (reaction (second (filter #(= list-id (first %)) (:new-todo-content @db))))))
+;; stuck here. -- how I do this?
 
 (defn btn-changer
   [doneness]
@@ -128,7 +159,9 @@
 
 (defn display-todo-list
   [list-info]
-  (let [todo-list (re-frame/subscribe [:todos (:id list-info)])]
+  (let [todo-list (re-frame/subscribe [:todos (:id list-info)])
+        new-todo-content (re-frame/subscribe [:new-todo-content (:id list-info)])]
+    ;(println @todo-list)
     (fn [list-info]
       [:div.col-xs-6
         [:div.card
@@ -142,9 +175,12 @@
                     [todo-cluster todo])]]
             [:div.card-footer
               [:input.form-control {:type "Text"
-                                    :name "description"}]
+                                    :name "description"
+                                    :value @new-todo-content
+                                    :on-change #(re-frame/dispatch [:new-todo-change (-> % .-target .-value) (:id list-info)])}]
               [:div.row {:style {:margin-bottom "20px"}}]
-              [:button.btn.btn-success.btn-block {:on-click (fn [e] (.log js/console e))}; (-> e .-parent .-value)))}
+              [:button.btn.btn-success.btn-block
+                ;{:on-click #(re-frame/dispatch [:create-todo new-todo-content (:id list-info)])}
                 "Add todo to list."]]]]])))
 
 
