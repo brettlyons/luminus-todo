@@ -51,11 +51,11 @@
 
 (re-frame/register-handler
   :process-todos-response
-  (fn [app-state [_ response]]
-    (println "TODOS HANDLER RESPONSE" response)
-    (println "app state" app-state)
-    (assoc-in app-state [:todos] (map #(zipmap (keys %)
-                                               (vals %)) response))))
+  (fn [app-state [_ response list-id]]
+    (println "TODOS HANDLER RESPONSE" response "list id" list-id)
+    (assoc-in app-state [:todos] (concat (:todos app-state) response))))
+;; this puts it all into one big list -- which I do not like.
+;; I would much rather have {listid (todo1, todo2) listid2 (todo1, todo2)}
 
 ;(map :id response)
 ;(map #(zipmap (keys %)
@@ -78,14 +78,15 @@
 (re-frame/register-handler
   :load-todos
   (fn [app-state [_ remaining-list-ids]]
-    (println "rem ids" remaining-list-ids)
-    (println app-state)
-    (GET (str "api/get-todos/" (first remaining-list-ids))
-        {:handler #(re-frame/dispatch [:process-todos-response %1])
-         :error-handler #(re-frame/dispatch [:process-lists-bad-response %1])})
-    (if (not-empty (next remaining-list-ids))
-      (recur app-state [_ (next remaining-list-ids)])
-      app-state)))
+    (let [list-id (first remaining-list-ids)]
+      (println "rem ids" remaining-list-ids list-id)
+      (println app-state)
+      (GET (str "api/get-todos/" list-id)
+          {:handler #(re-frame/dispatch [:process-todos-response %1 list-id])
+           :error-handler #(re-frame/dispatch [:process-lists-bad-response %1])})
+      (if (not-empty (next remaining-list-ids))
+        (recur app-state [_ (next remaining-list-ids)])
+        app-state))))
 
 
 
@@ -127,24 +128,28 @@
 
 (defn display-todo-list
   [list-info]
-  (let [lists (re-frame/subscribe [:todos])]
+  (let [all-lists (re-frame/subscribe [:todos])]
+  ; (let [lists (filter #(= (:id list-info) (:list %)) (re-frame/subscribe [:todos]))]
     (fn [list-info]
-      [:div.col-xs-6
-        [:div.card
-          [:div.card-header.card-title (str (:title list-info))
-            ;[:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
-              [:span.glyphicon.glyphicon-minus]
-            [:div.card-block
-              [:ul.list-group
-                (for [todo @lists]
-                    ^{:key (:id todo)}
-                    [todo-cluster todo])]]
-            [:div.card-footer
-              [:input.form-control {:type "Text"
-                                    :name "description"}]
-              [:div.row {:style {:margin-bottom "20px"}}]
-              [:button.btn.btn-success.btn-block {:on-click (fn [e] (.log js/console e))}; (-> e .-parent .-value)))}
-                "Add todo to list."]]]]])))
+      (println (filter #(= (:id list-info) (:list %)) @all-lists))
+      (let [todo-list (filter #(= (:id list-info) (:list %)) @all-lists)]
+        ;; need to filter based on list-id, so todos from list2 goes to list2 etc.
+        [:div.col-xs-6
+          [:div.card
+            [:div.card-header.card-title (str (:title list-info))
+              ;[:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
+                [:span.glyphicon.glyphicon-minus]
+              [:div.card-block
+                [:ul.list-group
+                  (for [todo todo-list]
+                      ^{:key (:id todo)}
+                      [todo-cluster todo])]]
+              [:div.card-footer
+                [:input.form-control {:type "Text"
+                                      :name "description"}]
+                [:div.row {:style {:margin-bottom "20px"}}]
+                [:button.btn.btn-success.btn-block {:on-click (fn [e] (.log js/console e))}; (-> e .-parent .-value)))}
+                  "Add todo to list."]]]]]))))
 
 
 (defn list-add-form
