@@ -49,14 +49,6 @@
     (re-frame/dispatch [:load-todos (map :id response)])
     (assoc-in app-state [:lists] response)))
 
-(re-frame/register-handler
-  :process-todos-response
-  (fn [app-state [_ response list-id]]
-    (println "TODOS HANDLER RESPONSE" response "list id" list-id)
-    (assoc-in app-state [:todos] (concat (:todos app-state) response))))
-;; this puts it all into one big list -- which I do not like.
-;; I would much rather have {listid (todo1, todo2) listid2 (todo1, todo2)}
-
 ;(map :id response)
 ;(map #(zipmap (keys %)
               ;(vals %)))
@@ -76,27 +68,33 @@
     app-state))
 
 (re-frame/register-handler
+  :process-todos-response
+  (fn [app-state [_ response list-id]]
+    (assoc-in app-state [:todos] (concat (:todos app-state) response))))
+
+(re-frame/register-handler
   :load-todos
   (fn [app-state [_ remaining-list-ids]]
     (let [list-id (first remaining-list-ids)]
-      (println "rem ids" remaining-list-ids list-id)
-      (println app-state)
       (GET (str "api/get-todos/" list-id)
-          {:handler #(re-frame/dispatch [:process-todos-response %1 list-id])
-           :error-handler #(re-frame/dispatch [:process-lists-bad-response %1])})
+        {:handler #(re-frame/dispatch [:process-todos-response % list-id])
+         :error-handler #(re-frame/dispatch [:process-lists-bad-response %])})
       (if (not-empty (next remaining-list-ids))
         (recur app-state [_ (next remaining-list-ids)])
         app-state))))
 
+(re-frame/register-handler
+  :process-delete-success
+  (fn [app-state [_ todo-id]]
+    (assoc-in app-state [:todos] (remove #(= todo-id %) (:todos app-state)))))
 
-
-;(re-frame/register-handler
-  ;:delete-todo
-  ;(fn [app-state [_ todo-id]]
-    ;(POST (str "api/delete-todo/" todo-id)
-          ;{:handler #()
-           ;:error-handler #(println "ERROR DELETING: " %1)})
-    ;(app-state))) ;; we need to remove stuff via last line here
+(re-frame/register-handler
+  :delete-todo
+  (fn [app-state [_ todo-id]]
+    (POST (str "api/delete-todo/" todo-id)
+          {:handler #(re-frame/dispatch [:process-delete-success todo-id])
+           :error-handler #(println "ERROR DELETING: " %1)})
+    app-state))
 
 (re-frame/register-sub
   :lists
@@ -105,8 +103,8 @@
 
 (re-frame/register-sub
   :todos
-  (fn [db]
-    (reaction (:todos @db))))
+  (fn [db [_ list-id]]
+    (reaction (filter #(= list-id (:list %)) (:todos @db)))))
 
 (defn btn-changer
   [doneness]
@@ -119,44 +117,42 @@
   [todo]
   (fn [todo]
     [:div.row
-      [:div.list-group-item (if (:done todo)
-                              [:del (:description todo)]
-                              (:description todo))
-        [:div.input-group
-          [btn-changer (:done todo)]
-          [:button.btn.btn-danger.btn-block "Delete"]]]]))
+     [:div.list-group-item (if (:done todo)
+                             [:del (:description todo)]
+                             (:description todo))
+      [:div.input-group
+       [btn-changer (:done todo)]
+       [:button.btn.btn-danger.btn-block "Delete"]]]])) ;; lets get add before delete
+        ;{:on-click (re-frame/dispatch [:delete-todo (:id todo)])}
+        ;"Delete"]]]]))
 
 (defn display-todo-list
   [list-info]
-  (let [all-lists (re-frame/subscribe [:todos])]
-  ; (let [lists (filter #(= (:id list-info) (:list %)) (re-frame/subscribe [:todos]))]
+  (let [todo-list (re-frame/subscribe [:todos (:id list-info)])]
     (fn [list-info]
-      (println (filter #(= (:id list-info) (:list %)) @all-lists))
-      (let [todo-list (filter #(= (:id list-info) (:list %)) @all-lists)]
-        ;; need to filter based on list-id, so todos from list2 goes to list2 etc.
-        [:div.col-xs-6
-          [:div.card
-            [:div.card-header.card-title (str (:title list-info))
-              ;[:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
-                [:span.glyphicon.glyphicon-minus]
-              [:div.card-block
-                [:ul.list-group
-                  (for [todo todo-list]
-                      ^{:key (:id todo)}
-                      [todo-cluster todo])]]
-              [:div.card-footer
-                [:input.form-control {:type "Text"
-                                      :name "description"}]
-                [:div.row {:style {:margin-bottom "20px"}}]
-                [:button.btn.btn-success.btn-block {:on-click (fn [e] (.log js/console e))}; (-> e .-parent .-value)))}
-                  "Add todo to list."]]]]]))))
+      [:div.col-xs-6
+        [:div.card
+          [:div.card-header.card-title (str (:title list-info))
+            ;[:a.btn.btn-danger.btn-sm.pull-right {:href (str "api/delete-list/" (:id list-info)) :style (str "visibility:" (if (empty? (:todos list-info)) "visible" "hidden"))}
+              [:span.glyphicon.glyphicon-minus]
+            [:div.card-block
+              [:ul.list-group
+                (for [todo @todo-list]
+                    ^{:key (:id todo)}
+                    [todo-cluster todo])]]
+            [:div.card-footer
+              [:input.form-control {:type "Text"
+                                    :name "description"}]
+              [:div.row {:style {:margin-bottom "20px"}}]
+              [:button.btn.btn-success.btn-block {:on-click (fn [e] (.log js/console e))}; (-> e .-parent .-value)))}
+                "Add todo to list."]]]]])))
 
 
 (defn list-add-form
   []
   (fn []
     [:div.col-xs-6
-      [:form {:action (str "/api/add-list")
+      [:form {:action (str "/api/create-list")
               :method "POST"}
         [:div.input-group.input-group-sm
           [:input.form-control {:type "Text"
