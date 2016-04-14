@@ -52,8 +52,8 @@
       :summary "Returns lists w/o todos"
       ;(ok (db/get-lists)))
       (ok (map (fn [todo-list] {:title (:title todo-list)
-                                :id (:id todo-list)})
-                                ;:todos (db/get-todos {:list_id (:id todo-list)})})
+                                :id (:id todo-list)
+                                :todos (db/get-todos {:list_id (:id todo-list)})})
                (db/get-lists))))
     (GET "/get-todos/:list-id" []
       :summary "Returns the todos for a given list id"

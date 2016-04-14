@@ -40,14 +40,23 @@
   :initialize-db
   (fn [db v]
     {:lists []
-     :todos {}
-     :search-input ""
-     :new-todo-content nil}))
+     :search-input ""}))
+
+;; I return to the idea that . .
+;; the lists vector should contain a list object that looks like this:
+;; {:list-id 1
+;;  :title "Some list title"
+;;  :todos ({:id 1 :description "The todo" :done false})
+;;  :new-todo-content ""} {etc...}
+
+;;  ^ this.
+
 
 (re-frame/register-handler
   :process-lists-response
   (fn [app-state [_ response]]
-    (re-frame/dispatch [:load-todos (map :id response)])
+    (println "Get-lists response: " response)
+    ;(re-frame/dispatch [:load-todos (map :id response)])
     (assoc-in app-state [:lists] response)))
 
 ;(map :id response)
@@ -71,7 +80,6 @@
 (re-frame/register-handler
   :process-todos-response
   (fn [app-state [_ response list-id]]
-    (println "process-t-r" response)
     (assoc-in app-state [:todos] (concat (:todos app-state) response))))
 
 (re-frame/register-handler
@@ -135,6 +143,7 @@
   :new-todo-content
   (fn [db [_ list-id]]
     (reaction (second (filter #(= list-id (first %)) (:new-todo-content @db))))))
+
 ;; stuck here. -- how I do this?
 
 (defn btn-changer
