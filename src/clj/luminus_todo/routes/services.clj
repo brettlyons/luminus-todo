@@ -10,6 +10,9 @@
                       :chief [{:name String
                                :type #{{:id String}}}]})
 
+(s/defschema Todo {:description String
+                   :list-id Long})
+
 (defapi service-routes
   {:swagger {:ui "/swagger-ui"
              :spec "/swagger.json"
@@ -18,19 +21,18 @@
                            :description "Sample Services"}}}}
   (context "/api" []
     :tags ["todos"]
-
     ;(GET "/plus" []
       ;:return       Long
       ;:query-params [x :- Long, {y :- Long 1}]
       ;:summary      "x+y with query-parameters. y defaults to 1."
       ;(ok (+ x y)))
-
     (POST "/create-todo" []
       ; :form-params [description :- String, list :- Long]
-      :form-params [description :- String, list-id :- Long]
+      :body [todo Todo]
       :summary     "Post todos address"
-      (println description)
-      (db/create-todo! {:description description :list_id list-id})
+      (println todo)
+      (db/create-todo! {:description (:description todo)
+                        :list_id (:list-id todo)})
       (ok))
     (POST "/create-list" []
       :form-params [title :- String]
@@ -50,54 +52,12 @@
       (ok))
     (GET "/get-lists" []
       :summary "Returns lists w/o todos"
-      ;(ok (db/get-lists)))
-      (ok (map (fn [todo-list] {:title (:title todo-list)
-                                :id (:id todo-list)
-                                :todos (db/get-todos {:list_id (:id todo-list)})})
-               (db/get-lists))))
+      (ok (db/get-lists)))
+      ;(ok (map (fn [todo-list] {:title (:title todo-list)
+                                ;:id (:id todo-list)
+                                ;:todos (db/get-todos {:list_id (:id todo-list)})})
+               ;(db/get-lists))))
     (GET "/get-todos/:list-id" []
       :summary "Returns the todos for a given list id"
       :path-params [list-id :- Long]
-      (ok (db/get-todos {:list_id list-id})))
-    ;(GET "/times/:x/:y" []
-      ;:return      Long
-      ;:path-params [x :- Long, y :- Long]
-      ;:summary     "x*y with path-parameters"
-      ;(ok (* x y)))
-
-    ;(POST "/divide" []
-      ;:return      Double
-      ;:form-params [x :- Long, y :- Long]
-      ;:summary     "x/y with form-parameters"
-      ;(ok (/ x y)))
-
-    ;(GET "/power" []
-      ;:return      Long
-      ;:header-params [x :- Long, y :- Long]
-      ;:summary     "x^y with header-parameters"
-      ;(ok (long (Math/pow x y))))
-
-    ;(PUT "/echo" []
-      ;:return   [{:hot Boolean}]
-      ;:body     [body [{:hot Boolean}]]
-      ;:summary  "echoes a vector of anonymous hotties"
-      ;(ok body))
-
-    ;(POST "/echo" []
-      ;:return   (s/maybe Thingie)
-      ;:body     [thingie (s/maybe Thingie)]
-      ;:summary  "echoes a Thingie from json-body"
-      ;(ok thingie)))
-
-  (context "/context" []
-    :tags ["context"]
-    :summary "summary inherited from context"
-    (context "/:kikka" []
-      :path-params [kikka :- s/Str]
-      :query-params [kukka :- s/Str]
-      (GET "/:kakka" []
-        :path-params [kakka :- s/Str]
-        (ok {:kikka kikka
-             :kukka kukka
-             :kakka kakka}))))
-))
+      (ok (db/get-todos {:list_id list-id})))))

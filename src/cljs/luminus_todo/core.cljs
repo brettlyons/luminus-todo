@@ -42,21 +42,12 @@
     {:lists []
      :search-input ""}))
 
-;; I return to the idea that . .
-;; the lists vector should contain a list object that looks like this:
-;; {:list-id 1
-;;  :title "Some list title"
-;;  :todos ({:id 1 :description "The todo" :done false})
-;;  :new-todo-content ""} {etc...}
-
-;;  ^ this.
-
-
 (re-frame/register-handler
   :process-lists-response
   (fn [app-state [_ response]]
     (println "Get-lists response: " response)
-    ;(re-frame/dispatch [:load-todos (map :id response)])
+    (re-frame/dispatch [:load-todos (map :id response)])
+    (println (filter #(= 1 (:id %)) response))
     (assoc-in app-state [:lists] response)))
 
 ;(map :id response)
@@ -109,25 +100,20 @@
 (re-frame/register-handler
   :create-todo
   (fn [app-state [_ todo-content list-id]]
-    (println "create-todo" @todo-content list-id)
-    (re-frame/dispatch [:post-todo @todo-content list-id])
-    (assoc-in app-state [:todos] (cons (:todos app-state) {:description @todo-content :done false :list list-id}))))
+    (println "create-todo" todo-content list-id)
+    (re-frame/dispatch [:post-todo todo-content list-id])
+    app-state))
 
 (re-frame/register-handler
   :post-todo
   (fn [app-state [_ todo-content list-id]]
-    ;(POST "api/create-todo"
-          ;{:params {:description todo-content
-                    ;:list-id list-id}
-           ;:handler #(re-frame/dispatch [:process-post-todo])
-           ;:error-handler #(println "CREATE-TODO-ERROR: " %)})
+    (println "post" todo-content list-id)
+    (POST "api/create-todo"
+          {:params {:description todo-content
+                    :list-id list-id}
+           :handler #(println "TODO POSTED" %)
+           :error-handler #(println "CREATE-TODO-ERROR: " %)})
     app-state))
-
-(re-frame/register-handler
-  :new-todo-change
-  (fn [app-state [_ new-content list-id]]
-    (println app-state)
-    (assoc-in app-state [:new-todo-content list-id] new-content)))
 
 (re-frame/register-sub
   :lists
@@ -155,21 +141,23 @@
 
 (defn todo-cluster
   [todo]
-  (fn [todo]
-    [:div.row
-     [:div.list-group-item (if (:done todo)
-                             [:del (:description todo)]
-                             (:description todo))
-      [:div.input-group
-       [btn-changer (:done todo)]
-       [:button.btn.btn-danger.btn-block "Delete"]]]])) ;; lets get add before delete
-        ;{:on-click (re-frame/dispatch [:delete-todo (:id todo)])}
-        ;"Delete"]]]]))
+  (let [edit? (r/atom false)
+        tmp-edit (r/atom (:description todo))])
+    (fn [todo]
+      [:div.row
+      [:div.list-group-item (if (:done todo)
+                              [:del (:description todo)]
+                              (:description todo))
+        [:div.input-group
+        [btn-changer (:done todo)]
+        [:button.btn.btn-danger.btn-block "Delete"]]]])) ;; lets get add before delete
+          ;{:on-click (re-frame/dispatch [:delete-todo (:id todo)])}
+          ;"Delete"]]]]))
 
 (defn display-todo-list
   [list-info]
   (let [todo-list (re-frame/subscribe [:todos (:id list-info)])
-        new-todo-content (re-frame/subscribe [:new-todo-content (:id list-info)])]
+        new-todo-content (r/atom "")]
     ;(println @todo-list)
     (fn [list-info]
       [:div.col-xs-6
@@ -186,10 +174,10 @@
               [:input.form-control {:type "Text"
                                     :name "description"
                                     :value @new-todo-content
-                                    :on-change #(re-frame/dispatch [:new-todo-change (-> % .-target .-value) (:id list-info)])}]
+                                    :on-change #(reset! new-todo-content (-> % .-target .-value))}]
               [:div.row {:style {:margin-bottom "20px"}}]
               [:button.btn.btn-success.btn-block
-                ;{:on-click #(re-frame/dispatch [:create-todo new-todo-content (:id list-info)])}
+                {:on-click #(re-frame/dispatch [:create-todo @new-todo-content (:id list-info)])}
                 "Add todo to list."]]]]])))
 
 

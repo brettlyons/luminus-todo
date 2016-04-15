@@ -8542,3 +8542,414 @@ notifying browser that file changed:  out/luminus_todo/core.js
 [0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
 notifying browser that file changed:  out/luminus_todo/core.js
 [32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.465 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/goog/deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.997 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.679 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mERROR: No reader function for tag zipmap on file /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs, line 60, column 46
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.288 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mERROR: No reader function for tag zipmap on file /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs, line 60, column 46
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.258 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.323 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mERROR: No reader function for tag zipmap on file /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs, line 60, column 46
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.186 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.366 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mERROR: No reader function for tag zipmap on file /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs, line 60, column 46
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.221 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mERROR: No reader function for tag zipmap on file /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs, line 60, column 46
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.225 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mERROR: No reader function for tag zipmap on file /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs, line 60, column 46
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.2 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mERROR: No reader function for tag zipmap on file /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs, line 60, column 46
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.183 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Use of undeclared Var luminus-todo.core/% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+WARNING: Use of undeclared Var luminus-todo.core/vals% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.623 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mERROR: EOF while reading, starting at line 55 and column 1 on file /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs, line 274, column 1
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.182 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.185 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Wrong number of args (3) passed to cljs.core/zipmap at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+WARNING: Use of undeclared Var luminus-todo.core/vals% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.683 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Use of undeclared Var luminus-todo.core/vals% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.723 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Use of undeclared Var luminus-todo.core/vals% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.643 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Use of undeclared Var luminus-todo.core/vals% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.415 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.377 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.315 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Wrong number of args (4) passed to cljs.core/assoc-in at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+WARNING: Use of undeclared Var luminus-todo.core/% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+WARNING: Use of undeclared Var luminus-todo.core/% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.455 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Wrong number of args (3) passed to cljs.core/zipmap at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+WARNING: Use of undeclared Var luminus-todo.core/% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+WARNING: Use of undeclared Var luminus-todo.core/% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.441 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Wrong number of args (3) passed to cljs.core/zipmap at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+WARNING: Use of undeclared Var luminus-todo.core/% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+WARNING: Use of undeclared Var luminus-todo.core/% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.366 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Use of undeclared Var luminus-todo.core/vals% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.405 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.241 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+WARNING: Use of undeclared Var luminus-todo.core/vals% at line 60 /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.419 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.401 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.338 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.303 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.318 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.242 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.298 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.299 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.277 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/goog/deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 2.056 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.783 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.591 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.581 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.516 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.418 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.44 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.404 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.543 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.466 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.404 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.406 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.325 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.447 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mclojure.lang.ExceptionInfo: failed compiling file:/home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs
+ at clojure.core$ex_info.invokeStatic (core.clj:4617)
+    clojure.core$ex_info.invoke (core.clj:4617)
+    cljs.compiler$compile_file$fn__3590.invoke (compiler.cljc:1372)
+    cljs.compiler$compile_file.invokeStatic (compiler.cljc:1338)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1318)
+    cljs.closure$compile_file.invokeStatic (closure.clj:474)
+    cljs.closure$compile_file.invoke (closure.clj:465)
+    cljs.closure$eval5383$fn__5384.invoke (closure.clj:541)
+    cljs.closure$eval5319$fn__5320$G__5308__5327.invoke (closure.clj:431)
+    cljs.closure$eval5389$fn__5390.invoke (closure.clj:550)
+    cljs.closure$eval5319$fn__5320$G__5308__5327.invoke (closure.clj:431)
+    cljs.closure$compile_sources$iter__5504__5508$fn__5509.invoke (closure.clj:870)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.Cons.next (Cons.java:39)
+    clojure.lang.RT.next (RT.java:688)
+    clojure.core$next__4341.invokeStatic (core.clj:64)
+    clojure.core$dorun.invokeStatic (core.clj:3033)
+    clojure.core$doall.invokeStatic (core.clj:3039)
+    clojure.core$doall.invoke (core.clj:3039)
+    cljs.closure$compile_sources.invokeStatic (closure.clj:866)
+    cljs.closure$compile_sources.invoke (closure.clj:855)
+    cljs.closure$build.invokeStatic (closure.clj:1941)
+    cljs.closure$build.invoke (closure.clj:1880)
+    cljs.build.api$build.invokeStatic (api.clj:210)
+    cljs.build.api$build.invoke (api.clj:198)
+    figwheel_sidecar.components.cljs_autobuild$cljs_build.invokeStatic (cljs_autobuild.clj:24)
+    figwheel_sidecar.components.cljs_autobuild$cljs_build.invoke (cljs_autobuild.clj:23)
+    figwheel_sidecar.build_middleware.injection$hook$fn__17938.invoke (injection.clj:139)
+    figwheel_sidecar.build_middleware.notifications$hook$fn__18275.invoke (notifications.clj:187)
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.315 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.334 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.389 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.373 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.359 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.305 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mjava.io.FileNotFoundException: /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs (No such file or directory)
+ at java.io.FileInputStream.open0 (FileInputStream.java:-2)
+    java.io.FileInputStream.open (FileInputStream.java:195)
+    java.io.FileInputStream.<init> (FileInputStream.java:138)
+    clojure.java.io$fn__9524.invokeStatic (io.clj:238)
+    clojure.java.io/fn (io.clj:235)
+    clojure.java.io$fn__9433$G__9426__9440.invoke (io.clj:69)
+    clojure.java.io$fn__9494.invokeStatic (io.clj:165)
+    clojure.java.io/fn (io.clj:165)
+    clojure.java.io$fn__9446$G__9422__9453.invoke (io.clj:69)
+    clojure.java.io$reader.invokeStatic (io.clj:102)
+    clojure.java.io$reader.doInvoke (io.clj:86)
+    clojure.lang.RestFn.invoke (RestFn.java:410)
+    clojure.lang.AFn.applyToHelper (AFn.java:154)
+    clojure.lang.RestFn.applyTo (RestFn.java:132)
+    clojure.core$apply.invokeStatic (core.clj:648)
+    clojure.core$slurp.invokeStatic (core.clj:6657)
+    clojure.core$slurp.doInvoke (core.clj:6657)
+    clojure.lang.RestFn.invoke (RestFn.java:410)
+    cljs.closure$source_on_disk.invokeStatic (closure.clj:1636)
+    cljs.closure$source_on_disk.invoke (closure.clj:1617)
+    cljs.closure$output_unoptimized$fn__5774.invoke (closure.clj:1660)
+    clojure.core$map$fn__4785.invoke (core.clj:2646)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:521)
+    clojure.core$seq__4357.invokeStatic (core.clj:137)
+    clojure.core$filter$fn__4812.invoke (core.clj:2700)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:521)
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.311 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.508 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.368 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.385 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.292 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.292 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.285 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.316 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.335 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.444 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.281 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.437 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mjava.io.FileNotFoundException: /home/brett/workspace/luminus-todo/src/cljs/luminus_todo/core.cljs (No such file or directory)
+ at java.io.FileInputStream.open0 (FileInputStream.java:-2)
+    java.io.FileInputStream.open (FileInputStream.java:195)
+    java.io.FileInputStream.<init> (FileInputStream.java:138)
+    clojure.java.io$fn__9524.invokeStatic (io.clj:238)
+    clojure.java.io/fn (io.clj:235)
+    clojure.java.io$fn__9433$G__9426__9440.invoke (io.clj:69)
+    clojure.java.io$fn__9494.invokeStatic (io.clj:165)
+    clojure.java.io/fn (io.clj:165)
+    clojure.java.io$fn__9446$G__9422__9453.invoke (io.clj:69)
+    clojure.java.io$reader.invokeStatic (io.clj:102)
+    clojure.java.io$reader.doInvoke (io.clj:86)
+    clojure.lang.RestFn.invoke (RestFn.java:410)
+    clojure.lang.AFn.applyToHelper (AFn.java:154)
+    clojure.lang.RestFn.applyTo (RestFn.java:132)
+    clojure.core$apply.invokeStatic (core.clj:648)
+    clojure.core$slurp.invokeStatic (core.clj:6657)
+    clojure.core$slurp.doInvoke (core.clj:6657)
+    clojure.lang.RestFn.invoke (RestFn.java:410)
+    cljs.closure$source_on_disk.invokeStatic (closure.clj:1636)
+    cljs.closure$source_on_disk.invoke (closure.clj:1617)
+    cljs.closure$output_unoptimized$fn__5774.invoke (closure.clj:1660)
+    clojure.core$map$fn__4785.invoke (core.clj:2646)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:521)
+    clojure.core$seq__4357.invokeStatic (core.clj:137)
+    clojure.core$filter$fn__4812.invoke (core.clj:2700)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:521)
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.307 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.25 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.348 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.28 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.277 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.248 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.292 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.307 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.274 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.237 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.286 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.256 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.246 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.259 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.252 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.279 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.247 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.278 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.265 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.297 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.255 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.223 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.244 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.26 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.286 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.27 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.273 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.253 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.232 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljc" "src/cljs" "env/dev/cljs")...
+notifying browser that file changed:  out/luminus_todo/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.28 seconds.[0m
