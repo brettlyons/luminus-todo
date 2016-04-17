@@ -39,15 +39,12 @@
 (re-frame/register-handler
   :initialize-db
   (fn [db v]
-    {:lists []
-     :search-input ""}))
+    {:lists []}))
 
 (re-frame/register-handler
   :process-lists-response
   (fn [app-state [_ response]]
-    (println "Get-lists response: " response)
     (re-frame/dispatch [:load-todos (map :id response)])
-    (println (filter #(= 1 (:id %)) response))
     (assoc-in app-state [:lists] response)))
 
 ;(map :id response)
@@ -71,6 +68,7 @@
 (re-frame/register-handler
   :process-todos-response
   (fn [app-state [_ response list-id]]
+    (println "TODOS RESPONSE: " response)
     (assoc-in app-state [:todos] (concat (:todos app-state) response))))
 
 (re-frame/register-handler
@@ -86,14 +84,16 @@
 
 (re-frame/register-handler
   :process-delete-success
-  (fn [app-state [_ todo-id]]
-    (assoc-in app-state [:todos] (remove #(= todo-id %) (:todos app-state)))))
+  (fn [app-state [_ list-id]]
+    (re-frame/dispatch [:load-todos (list list-id)])
+    app-state))
 
 (re-frame/register-handler
   :delete-todo
-  (fn [app-state [_ todo-id]]
+  (fn [app-state [_ todo-id list-id]]
+    (println todo-id)
     (POST (str "api/delete-todo/" todo-id)
-          {:handler #(re-frame/dispatch [:process-delete-success todo-id])
+          {:handler #(re-frame/dispatch [:process-delete-success list-id])
            :error-handler #(println "ERROR DELETING: " %1)})
     app-state))
 
@@ -123,6 +123,7 @@
 (re-frame/register-sub
   :todos
   (fn [db [_ list-id]]
+    (println "todos subscription ")
     (reaction (filter #(= list-id (:list %)) (:todos @db)))))
 
 (re-frame/register-sub
@@ -142,17 +143,17 @@
 (defn todo-cluster
   [todo]
   (let [edit? (r/atom false)
-        tmp-edit (r/atom (:description todo))])
+        tmp-edit (r/atom (:description todo))]
     (fn [todo]
-      [:div.row
+      [:div.row]
       [:div.list-group-item (if (:done todo)
                               [:del (:description todo)]
                               (:description todo))
         [:div.input-group
-        [btn-changer (:done todo)]
-        [:button.btn.btn-danger.btn-block "Delete"]]]])) ;; lets get add before delete
-          ;{:on-click (re-frame/dispatch [:delete-todo (:id todo)])}
-          ;"Delete"]]]]))
+          [btn-changer (:done todo)]
+          [:button.btn.btn-danger.btn-block ; lets get add before delete
+            {:on-click #(re-frame/dispatch [:delete-todo (:id todo) (:list todo)])}
+            "Delete"]]])))
 
 (defn display-todo-list
   [list-info]
